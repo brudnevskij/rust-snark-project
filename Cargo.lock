@@ -194,6 +194,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "rust-snark-project"
+version = "0.1.0"
+dependencies = [
+ "bincode",
+ "num-bigint",
+ "num-integer",
+ "num-traits",
+ "rand",
+ "serde",
+ "serde_json",
+ "sha2",
+]
+
+[[package]]
 name = "ryu"
 version = "1.0.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -296,18 +310,4 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
-]
-
-[[package]]
-name = "zk-snark-project"
-version = "0.1.0"
-dependencies = [
- "bincode",
- "num-bigint",
- "num-integer",
- "num-traits",
- "rand",
- "serde",
- "serde_json",
- "sha2",
 ]

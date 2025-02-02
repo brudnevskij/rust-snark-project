@@ -1,5 +1,5 @@
 [package]
-name = "zk-snark-project"
+name = "rust-snark-project"
 version = "0.1.0"
 edition = "2021"
 
