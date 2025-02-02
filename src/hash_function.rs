@@ -14,7 +14,7 @@ impl HashFunction for SimpleAddHash {
 
 pub struct CustomHash;
 
-impl HashFunction for CustomHash{
+impl HashFunction for CustomHash {
     fn hash(&self, a: &BigInt, b: &BigInt) -> BigInt {
         a + b
     }

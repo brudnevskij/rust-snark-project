@@ -1,3 +1,4 @@
+use crate::hash_function::HashFunction;
 use crate::r1cs::{Operation, Variable, R1CS};
 use num_bigint::BigInt;
 use std::io::Write;
@@ -16,7 +17,7 @@ pub struct Circuit {
 }
 
 impl Circuit {
-    pub fn new(hash_function: Option<dyn HashFunction>) -> Self {
+    pub fn new(hash_function: Option<Box<dyn HashFunction>>) -> Self {
         Circuit {
             hash_function,
             inputs: Vec::new(),
@@ -66,21 +67,21 @@ impl Circuit {
         for gate in &self.gates {
             match gate {
                 Gate::Add(a, b, output) => r1cs.add_constraint(
-                    vec![(r1cs.variables[a].clone(), BigInt::from(1))],
-                    vec![(r1cs.variables[b].clone(), BigInt::from(1))],
-                    vec![(r1cs.variables[output].clone(), BigInt::from(1))],
+                    vec![(r1cs.variables[*a].clone(), BigInt::from(1))],
+                    vec![(r1cs.variables[*b].clone(), BigInt::from(1))],
+                    vec![(r1cs.variables[*output].clone(), BigInt::from(1))],
                     Operation::Add,
                 ),
                 Gate::Mul(a, b, output) => r1cs.add_constraint(
-                    vec![(r1cs.variables[a].clone(), BigInt::from(1))],
-                    vec![(r1cs.variables[b].clone(), BigInt::from(1))],
-                    vec![(r1cs.variables[output].clone(), BigInt::from(1))],
+                    vec![(r1cs.variables[*a].clone(), BigInt::from(1))],
+                    vec![(r1cs.variables[*b].clone(), BigInt::from(1))],
+                    vec![(r1cs.variables[*output].clone(), BigInt::from(1))],
                     Operation::Mul,
                 ),
                 Gate::Hash(a, b, output) => r1cs.add_constraint(
-                    vec![(r1cs.variables[a].clone(), BigInt::from(1))],
-                    vec![(r1cs.variables[b].clone(), BigInt::from(1))],
-                    vec![(r1cs.variables[output].clone(), BigInt::from(1))],
+                    vec![(r1cs.variables[*a].clone(), BigInt::from(1))],
+                    vec![(r1cs.variables[*b].clone(), BigInt::from(1))],
+                    vec![(r1cs.variables[*output].clone(), BigInt::from(1))],
                     Operation::Hash,
                 ),
             }
