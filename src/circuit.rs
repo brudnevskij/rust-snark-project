@@ -8,10 +8,6 @@ pub enum Gate {
     Hash(usize, usize, usize),
 }
 
-trait HashFunction {
-    fn hash(&self, a: &BigInt, b: &BigInt) -> BigInt;
-}
-
 pub struct Circuit {
     hash_function: Option<Box<dyn HashFunction>>,
     inputs: Vec<BigInt>,
